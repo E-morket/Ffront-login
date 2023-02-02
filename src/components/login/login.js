@@ -1,4 +1,4 @@
-import * as React from 'react'
+import *as React from 'react'
 import { useState,useEffects} from 'react' 
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
@@ -9,7 +9,7 @@ import Typography  from '@mui/material/Typography'
 import  Stack  from '@mui/material/Stack';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import FormHelperText from '@mui/material/FormHelperText';
+
 
 import OutlinedInput from '@mui/material/OutlinedInput';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -20,48 +20,50 @@ import IconButton from '@mui/material/IconButton';
 
 
 const Login = () =>{ 
-    const Item = styled(Paper)(({ theme }) => ({
-            backgroundColor: '#A0E5DD',
-            ...theme.typography.body2,
-            padding: theme.spacing(1),
-            textAlign: 'center',
-            color: theme.palette.text.secondary,
-      }));
-      
-const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+ const [usuario,setUsuario] =useState('')
+ const[password,setPassword] = useState(null)
+
+ const onChangeUsuario = (event) => { setUsuario(event.target.value)}
+ const onChangePassword = (event) => { setPassword(event.target.value)}
+ console.log(password)
+    
 const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-
 const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#A0E5DD',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
     return(
 <Grid container>
         <Grid item xs={4}/>
          <Grid item xs={4} pt={8}>
-            <Item>
-
-            <Typography variant ="h4" gutterBotton>
+            
+         <Item>
+           <Typography variant ="h4" gutterBotton>
                 Inicio de Sesion
             </Typography>
             <Grid item pt={2}>
-                <TextField id="outlined-basic" label="Usuario" variant="outlined" />
+                <TextField 
+                value={usuario} 
+                onChange={onChangeUsuario}
+                id="outlined-basic" 
+                label="Usuario" 
+                variant="outlined" />
                 </Grid>
             <Grid item pt={2}>
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-          />
-          <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
-        </FormControl>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+        
+        <FormControl sx={{ m: 1, width: '29ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Contraseña</InputLabel>
           <OutlinedInput
+          value={password} 
+          onChange={onChangePassword}
             id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
             endAdornment={
